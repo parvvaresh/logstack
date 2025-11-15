@@ -1,7 +1,3 @@
-Here’s an updated, drop-in README you can paste into your repo. It reflects everything we fixed: Loki config gotchas, healthchecks, permissions, Promtail labels, and the JSON logger change for Go.
-
----
-
 # LogStack — Go + Promtail + Loki + Grafana
 
 Dockerized logging stack that collects container logs, parses them, and shows them in Grafana with useful charts.
