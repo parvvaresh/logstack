@@ -1,6 +1,0 @@
-*F(alireza)F-*L(ahmadi)L-*M(09152096894)M-*E(parvvaresh@gmail.com)E-*U(9912013)U-*PW(78995656)PW-*PO(admin)PO-
-*F(alireza)F-*L(parvaresh)L-*M(09152096894)M-*E(sdfu@gmail.com)E-*U(9925449)U-*PW(alirezaa)PW-*PO(admin)PO-
-*F(mohsen)F-*L(rezaee)L-*M(09155211598)M-*E(hjhdj@gmail.com)E-*U(1234567)U-*PW(asdfghjkl)PW-*PO(user)PO-
-*F(reza)F-*L(pari)L-*M(09057427313)M-*E(parrrriiii@gmail.om)E-*U(7654321)U-*PW(12345678999)PW-*PO(user)PO-
-*F(chos)F-*L(gohi)L-*M(09121211225)M-*E(gohi@gmail.com)E-*U(1425365)U-*PW(gfgsdggfsjd)PW-*PO(admin)PO-
-*F(MOHMMAD)F-*L(YAVARI)L-*M(09399061375)M-*E(mohamadyavari02155@gmail.com)E-*U(9912051)U-*PW(123456789PP)PW-*PO(admin)PO-
