@@ -3,9 +3,10 @@ name: logstack
 services:
   loki:
     image: grafana/loki:3.1.1
-    command: -config.file=/etc/loki/local-config.yaml
+    command: -config.file=/etc/loki/config.yml
     container_name: loki
     volumes:
+      - ./loki/config.yml:/etc/loki/config.yml:ro
       - ./data/loki:/loki
     ports:
       - "3100:3100"
