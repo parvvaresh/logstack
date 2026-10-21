@@ -61,7 +61,7 @@ func logging(next http.Handler) http.Handler {
 			Int("status", sw.status).
 			Str("user_agent", r.UserAgent()).
 			Str("remote_ip", remoteIP).
-			Int64("duration_ms", time.Since(start).Milliseconds()).
+			Float64("duration_ms", float64(time.Since(start).Microseconds())/1000).
 			Msg("request completed")
 	})
 }
@@ -113,7 +113,8 @@ func main() {
 		}
 	}
 	zerolog.SetGlobalLevel(level)
-	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stdout, TimeFormat: time.RFC3339})
+	// pure JSON on stdout so Promtail/Loki can parse fields with `| json`
+	log.Logger = zerolog.New(os.Stdout).With().Timestamp().Logger()
 
 	addr := os.Getenv("ADDR")
 	if addr == "" {
