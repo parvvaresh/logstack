@@ -30,7 +30,7 @@ curl -i "http://localhost:8080/work?task=fail_job"
 
 # 4) open Grafana
 # http://localhost:3000  (admin / admin)
-# Import the JSON dashboard (Dashboards → Import) or use Explore with the queries below
+# The "LogStack — Service Overview" dashboard is provisioned automatically and set as the home page
 ```
 
 ---
@@ -233,7 +233,12 @@ sum(count_over_time({service="app"} | json | status=~"5.." [1m]))
 
 **If `service="app"` is empty**, try `{container="app"}`; it means the `service` label wasn’t created yet (check Promtail relabels).
 
-**Dashboard import:** Dashboards → Import → paste the JSON I provided earlier. Pick datasource “Loki”.
+**Dashboard:** `grafana/provisioning/dashboards/logstack-overview.json` is provisioned automatically (home dashboard). It has:
+
+* **Overview** — requests, throughput, 5xx error rate, p95 latency, error/warn log counts
+* **HTTP traffic** — req/s by status class, p50/p95/p99 latency, req/s and p95 per endpoint, per-endpoint summary table
+* **Logs & errors** — log volume by level, level distribution, errors by component, top error messages, failed & slow requests, full log stream
+* Variables: `Service`, `Level`, `Search (regex)`, `Slow threshold (ms)`; service restarts are shown as annotations
 
 ---
 
@@ -266,20 +271,22 @@ common:
 storage_config:
   filesystem:
     directory: /loki/chunks
-  boltdb_shipper:
-    active_index_directory: /loki/index
-    cache_location: /loki/boltdb-cache
+  tsdb_shipper:
+    active_index_directory: /loki/tsdb-index
+    cache_location: /loki/tsdb-cache
 schema_config:
   configs:
     - from: 2024-01-01
-      store: boltdb-shipper
+      store: tsdb
       object_store: filesystem
       schema: v13
       index:
         prefix: index_
         period: 24h
 compactor:
-  working_directory: /loki/boltdb-shipper-compactor
+  working_directory: /loki/compactor
+  retention_enabled: true
+  delete_request_store: filesystem
 limits_config:
   retention_period: 168h
 ```
