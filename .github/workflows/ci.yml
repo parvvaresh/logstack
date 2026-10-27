@@ -17,6 +17,9 @@ jobs:
       - name: Create local data directories
         run: |
           mkdir -p data/loki data/grafana
+          # containers run as non-root: Loki=10001, Grafana=472
+          sudo chown -R 10001:10001 data/loki
+          sudo chown -R 472:472 data/grafana
       - name: Start Docker Compose
         run: |
           docker compose up -d
